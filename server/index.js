@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 const server = createServer(app)
-app.use(express.static(join(__dirname, 'client/src')));
+app.use(express.static(join(__dirname, '../client/src')));
 
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, '../client/public/index.html'))
