@@ -23,7 +23,7 @@ function App() {/*
 }
 
 function sendMessage() {
-    let message = document.getElementById("message").value;
+    let message = document.getElementById("inputfield").value;
     if (message.length !== 0) {
         const node = document.createElement("h4");
         node.setAttribute("id", "sent-message")
@@ -41,7 +41,7 @@ messageButton.addEventListener("click", function () {
     sendMessage();
 });
 
-var inputField = document.getElementById("message");
+var inputField = document.getElementById("inputfield");
 inputField.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();

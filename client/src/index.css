@@ -1,10 +1,17 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+header {
+  height: 10vh;
+  background-color: #151515;
+  width: 100%;
 }
 
 code {
@@ -17,18 +24,18 @@ div {
 }
 
 #main-div {
-  margin-top: 50px;
-  margin-left: 50px;
   height: 400px;
   width: 500px;
   position: relative;
+  display: flex;
 }
 
 #user-input {
   position: absolute;
   bottom: 0;
-  width: 496px;
-  height: 30px;
+  width: 100%;
+  height: 10%;
+  display: flex;
 }
 
 #sent-message {
@@ -36,8 +43,9 @@ div {
 
 #messages-sent {
   align-content: end;
-  height: 350px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  width: 100%;
+  height: 90%;
 }
 
 h4 {
@@ -48,12 +56,53 @@ h4 {
   width: 325px;
 }
 
-#message {
-  width: 80%;
+#inputfield {
+  width: 90%;
+  float: left;
+  height: 90%;
+  border-radius: 15px 0px 0px 15px
 }
 
 #send-button {
+  background-color: #232323;
+  color: white;
+  float: right;
+  height: 100%;
+  width: 10%;
+  border-radius: 0px 15px 15px 0px
+}
 
+#send-button:hover {
+  opacity: 0.7;
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #232323; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* Style page content */
+.main {
+  padding: 0px 10px;
+  width: 100%;
+  height: 90vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
 
 
