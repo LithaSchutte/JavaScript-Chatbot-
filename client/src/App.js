@@ -1,52 +1,86 @@
-import React, {createElement} from "react";
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useRef } from 'react';
+import socketIOClient from "socket.io-client";
+import './App.css'; // Remove if not needed
+import './index.css'; // Remove if not needed
 
-function App() {/*
+const ENDPOINT = "http://localhost:3000"; // Adjust if your server runs on a different address
 
-  const [data, setData] = React.useState(null);
+function App() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const messagesEndRef = useRef(null);
+  const socketRef = useRef(null);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
+  useEffect(() => {
+    socketRef.current = socketIOClient(ENDPOINT);
+
+    socketRef.current.on("receiveMessage", ({ message, response }) => {
+      setMessages(prevMessages => [...prevMessages, `You: ${message}`, `Server: ${response}`]);
+    });
+
+    return () => {
+      socketRef.current.disconnect();
+    };
   }, []);
 
-  return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <p>{!data ? "Loading..." : data}</p>
-        </header>
-      </div>
-  );*/
-}
-
-function sendMessage() {
-    let message = document.getElementById("inputfield").value;
+  const sendMessage = () => {
+    let message = input.trim();
     if (message.length !== 0) {
-        const node = document.createElement("h4");
-        node.setAttribute("id", "sent-message")
-        const textnode = document.createTextNode(message);
-        node.appendChild(textnode);
-        document.getElementById("messages-sent").appendChild(node);
-        let messagesSent = document.getElementById("messages-sent");
-        messagesSent.scrollTop = messagesSent.scrollHeight;
+      socketRef.current.emit("sendMessage", message);
+      setInput('');
     }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendMessage();
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div id="main-parent">
+      <header className="bg-dark text-white p-3">
+        <h1 id="heading"> Internet Technologies Chatbot </h1>
+      </header>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <main role="main" className="container chat-container">
+        <div id="main-div" className="d-flex flex-column justify-content-between h-100">
+          <div id="messages-sent" className="flex-grow-0 overflow-auto">
+            {messages.map((message, index) => (
+                <div key={index}
+                     className={`sent-message ${message.startsWith('You:') ? 'client' : ''}`}>{message}</div>
+            ))}
+            <div ref={messagesEndRef}/>
+          </div>
+          <div id="user-input" className="input-group my-3">
+            <input
+              id="inputfield"
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="form-control"
+              placeholder="Send a message..."
+            />
+            <div className="input-group-append">
+              <button id="send-button" className="btn btn-primary" onClick={sendMessage}>
+                <i className="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-const messageButton = document.getElementById("send-button");
-
-messageButton.addEventListener("click", function () {
-    sendMessage();
-});
-
-var inputField = document.getElementById("inputfield");
-inputField.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("send-button").click();
-        inputField.value = "";
-    }
-})
 export default App;
