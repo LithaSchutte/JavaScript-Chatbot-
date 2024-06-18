@@ -15,13 +15,17 @@ function App() {
     socketRef.current = socketIOClient(ENDPOINT);
 
     socketRef.current.on("receiveMessage", ({ message, response }) => {
-      setMessages(prevMessages => [...prevMessages, `You: ${message}`, `Server: ${response}`]);
+      if (message) {
+        setMessages((prevMessages) => [...prevMessages, `You: ${message}`]);
+      }
+      setMessages((prevMessages) => [...prevMessages, `Server: ${response}`]);
     });
 
     return () => {
       socketRef.current.disconnect();
     };
   }, []);
+
 
   const sendMessage = () => {
     let message = input.trim();
