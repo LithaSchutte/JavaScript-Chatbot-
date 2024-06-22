@@ -1,9 +1,38 @@
-{ "answers" :[
-    {"intent":"bestellen", "answer":"Sie wollen eine Bestellung aufgeben. Was möchten Sie bestellen? Als Getränk haben wir Fanta und Cola"},
-    {"intent":"aufgeben", "answer":"Sie wollen eine Bestellung aufgeben. Was möchten Sie bestellen? Getränk"},
-    {"intent":"bestellung", "answer":"Sie wollen eine Bestellung aufgeben. Was möchten Sie bestellen? Fangen wir mit Getränken an: Cola oder Fanta?"},
-    {"intent":"cola", "answer":"Ich habe Cola notiert. Sie kostet 1€, möchten Sie noch ein Getränk bestellen"},
-    {"intent":"fanta", "answer":"Ich habe Fanta notiert. Sie kostet 1€, möchten Sie noch ein Getränk bestellen"},
-    {"intent":"gericht", "answer":"Sie möchten ein Gericht bestellen. Ich habe folgende Gerichte zur Auswahl"}
-  ]
+{
+  "begin": {
+    "default": "Welcome to [Dealership Name]! Are you looking for a new car today?",
+    "yes": {
+        "answer": "Great! What kind of car are you interested in? We have a wide selection of [Car Brands].",
+        "switch": "general"
+    },
+    "no": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire rotations, and more."
+  },
+  "general": {
+    "hello": {
+      "answer": "Hello there! Welcome to [Dealership Name]. How can I help you today?",
+      "switch": "begin"
+    },
+    "hi": "Hi there! Welcome to [Dealership Name]. How can I assist you today?",
+    "help": "Sure, I'm happy to help. What can I answer for you today?",
+    "information": "I'd be happy to provide you with information. What specific information are you looking for?"
+  },
+  "browsing": {
+    "models": "Great! What specific models are you interested in? We have a variety of models to suit different needs and budgets.",
+    "price": "Price range is an important factor. What is your preferred price range for your new car?",
+    "features": "Tell me more about the features you're looking for, and I'll narrow down our selection to match your preferences."
+  },
+  "service": {
+    "appointment": "I'd be happy to schedule an appointment for you. What kind of service do you need?",
+    "maintenance": "Regular maintenance is crucial for keeping your car in top condition. We recommend scheduling maintenance services every [Mileage Interval] miles.",
+    "repair": "If your car is experiencing any issues, please describe the problem and we'll schedule a repair appointment for you."
+  },
+  "next_step": {
+    "test_drive": "Absolutely! Please provide a convenient time for your test drive.",
+    "financing": "Great! Let's discuss your credit score, desired down payment, and monthly payment preferences."
+  },
+  "confirming": {
+    "test_drive": "Your test drive is scheduled for [time]. Thank you! Is there anything else I can assist you with?",
+    "financing": "You provided the following details for financing: [details]. Thank you! Is there anything else I can assist you with?",
+    "service_time": "Your appointment is scheduled for [time]. Thank you! Is there anything else I can assist you with?"
+  }
 }
