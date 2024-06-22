@@ -19,6 +19,7 @@ html, body {
 .container.chat-container {
      height: calc(100% - 56px) !important;
 }
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -37,6 +38,19 @@ header {
     font-size: 28px;
 }
 
+#main-div::before {
+    content: "Internet Technologies Chatbot";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.1); /* Adjust the color and opacity as needed */
+    white-space: nowrap;
+    z-index: 0; /* Ensure it's behind the chat content */
+    pointer-events: none; /* Allows clicks to pass through the watermark */
+}
+
 #main-div {
     height: 100% !important;
     border-radius: 10px;
@@ -44,6 +58,7 @@ header {
     margin: 20px;
     flex-direction: column !important;
     background-color: #36454F;
+    position: relative;
 }
 
 .h-100 {
@@ -62,6 +77,8 @@ header {
     align-items: flex-start; /* Align server messages to the left */
     padding: 10px;
     height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .sent-message {
@@ -78,7 +95,7 @@ header {
 }
 
 .sent-message.client {
-    background-color: #86B1CC;
+    background-color: #96B1CC;
     align-self: flex-end;
     margin-top: 10px;
     margin-right: 10px;
@@ -99,7 +116,7 @@ header {
     border-color: #333;
 }
 
-#send-button:hover{ /*to change the color of the button when the mouse is over it*/
+#send-button:hover{ /* To change the color of the button when the mouse is over it */
     background-color: #555;
     border-color: #555;
 }
