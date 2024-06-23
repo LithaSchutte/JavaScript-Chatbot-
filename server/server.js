@@ -1,13 +1,13 @@
 ﻿const express = require("express");
 const http = require("http");
-const {join} = require("path");
+const { join } = require("path");
 const socketIo = require("socket.io");
-const WebSocket = require("ws")
+const fs = require("fs");
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
-const fs = require("fs");
 
 app.use(express.static(join(__dirname, '../client/build')));
 
@@ -15,8 +15,8 @@ app.get("/", (req, res) => {
     res.sendFile(join(__dirname, '../client/build/index.html'));
 });
 
-const filePath = 'responses.json'
-let responses = {}
+const filePath = 'responses.json';
+let responses = {};
 
 fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -32,14 +32,13 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     }
 });
 
-
 const userStates = {};
 
 io.on("connection", (socket) => {
     console.log("New client connected");
     userStates[socket.id] = {};
 
-    socket.emit("receiveMessage", {response: responses.default});
+    socket.emit("receiveMessage", { response: responses.default });
 
     socket.on("sendMessage", (message) => {
         let response;
@@ -48,7 +47,22 @@ io.on("connection", (socket) => {
             userStates[socket.id].context = "begin";
         }
 
-        if (responses[userStates[socket.id].context] && responses[userStates[socket.id].context][lowerMessage]) {
+        // Check basic keywords first
+        if (responses.basic_keywords && responses.basic_keywords[lowerMessage]) {
+            const responseData = responses.basic_keywords[lowerMessage];
+
+            if (typeof responseData === "string") {
+                response = responseData; // Handle simple string response
+            } else if (typeof responseData === "object" && responseData.answer) {
+                response = responseData.answer; // Handle structured response with "answer"
+
+                // Update context based on "switch" field in the response
+                if (responseData.switch) {
+                    userStates[socket.id].context = responseData.switch;
+                }
+            }
+        } else if (responses[userStates[socket.id].context] && responses[userStates[socket.id].context][lowerMessage]) {
+            // Fall back to context-specific responses
             const responseData = responses[userStates[socket.id].context][lowerMessage];
 
             if (typeof responseData === "string") {
@@ -65,11 +79,12 @@ io.on("connection", (socket) => {
             response = "I'm sorry, I didn't understand that.";
         }
 
-        socket.emit("receiveMessage", {message, response});
+        socket.emit("receiveMessage", { message, response });
     });
 
     socket.on("disconnect", () => {
         console.log("Client disconnected");
+        delete userStates[socket.id]; // Clean up user state on disconnect
     });
 });
 

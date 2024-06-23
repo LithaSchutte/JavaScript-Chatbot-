@@ -1,7 +1,6 @@
 {
   "default": "Welcome to IntelliDrive Motors! Are you looking for a new car today?",
-  "car_brands": ["Toyota", "Hyundai", "Fiat", "Audi", "BMW", "Mercedes"],
-  "begin": {
+  "basic_keywords": {
     "yes": {
       "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
       "switch": "brand_selection"
@@ -10,12 +9,6 @@
       "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire rotations, and more.",
       "switch": "service"
     },
-    "default": {
-      "answer": "I didn't understand that. Are you looking for a new car today?",
-      "switch": "begin"
-    }
-  },
-  "general": {
     "hello": {
       "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
       "switch": "begin"
@@ -32,8 +25,46 @@
       "answer": "I'd be happy to provide you with information. What specific information are you looking for?",
       "switch": "begin"
     },
+    "test_drive": {
+      "answer": "Would you like to schedule a test drive for any of our available models?",
+      "switch": "next_step"
+    },
+    "financing": {
+      "answer": "Are you interested in learning more about financing options for a new car?",
+      "switch": "next_step"
+    },
+    "maintenance": {
+      "answer": "Is there any specific maintenance service you're interested in, such as oil change, tire rotation, or brake service?",
+      "switch": "maintenance"
+    },
+    "appointment": {
+      "answer": "Would you like to schedule a service appointment?",
+      "switch": "service"
+    },
+    "model_information": {
+      "answer": "Can I provide you with information about specific car models?",
+      "switch": "begin"
+    },
+    "brands": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "new": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    }
+  },
+  "begin": {
+    "yes": {
+      "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
+      "switch": "brand_selection"
+    },
+    "no": {
+      "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire rotations, and more.",
+      "switch": "service"
+    },
     "default": {
-      "answer": "I didn't catch that. How can I help you today?",
+      "answer": "I didn't understand that. Are you looking for a new car today?",
       "switch": "begin"
     }
   },
@@ -124,6 +155,10 @@
     },
     "default": {
       "answer": "I'm sorry, we currently don't have that Toyota model. Can I help you with another Toyota model?",
+      "switch": "toyota_models"
+    },
+    "yes": {
+      "answer": "The models we currently have available are the Camry and the Rav4",
       "switch": "toyota_models"
     }
   },
