@@ -1,12 +1,13 @@
 /* app.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /* General Reset and Base Styles */
 html, body {
     height: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     background-color: #20292f;
@@ -44,7 +45,7 @@ header {
 
 #heading {
     height: 28px;
-    font-size: 28px;
+    font-size: 4vw;
 }
 
 /* Main Container and Content Styling */
@@ -64,7 +65,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 3vw;
     color: rgba(255, 255, 255, 0.1); /* Adjust the color and opacity as needed */
     white-space: nowrap;
     z-index: 0; /* Ensure it's behind the chat content */
@@ -104,7 +105,7 @@ header {
 }
 
 .sent-message.client {
-    background-color: #050d42;
+    background-color: #96B1CC;
     align-self: flex-end;
     margin-top: 10px;
     margin-right: 10px;
