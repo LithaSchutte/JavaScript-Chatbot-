@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 import './App.css'; // Remove if not needed
 import './index.css'; // Remove if not needed
 
-const ENDPOINT = "http://localhost:3000"; // Adjust if your server runs on a different address
+const ENDPOINT = "http://localhost:3000";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -14,11 +14,8 @@ function App() {
   useEffect(() => {
     socketRef.current = socketIOClient(ENDPOINT);
 
-    socketRef.current.on("receiveMessage", ({ message, response }) => {
-      if (message) {
-        setMessages((prevMessages) => [...prevMessages, `You: ${message}`]);
-      }
-      setMessages((prevMessages) => [...prevMessages, `Server: ${response}`]);
+    socketRef.current.on("receiveMessage", ({ response }) => {
+      setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);
     });
 
     return () => {
@@ -26,11 +23,11 @@ function App() {
     };
   }, []);
 
-
   const sendMessage = () => {
     let message = input.trim();
     if (message.length !== 0) {
       socketRef.current.emit("sendMessage", message);
+      setMessages((prevMessages) => [...prevMessages, { text: message, sender: 'user' }]);
       setInput('');
     }
   };
@@ -53,15 +50,16 @@ function App() {
   return (
     <div id="main-parent">
       <header className="bg-dark text-white p-3">
-        <h1 id="heading"> Internet Technologies Chatbot </h1>
+        <h1 id="heading"> IntelliDrive Motors Chatbot </h1>
       </header>
       <noscript>You need to enable JavaScript to run this app.</noscript>
       <main role="main" className="container chat-container">
         <div id="main-div" className="d-flex flex-column justify-content-between h-100">
           <div id="messages-sent" className="flex-grow-0 overflow-auto">
             {messages.map((message, index) => (
-                <div key={index}
-                     className={`sent-message ${message.startsWith('You:') ? 'client' : ''}`}>{message}</div>
+              <div key={index} className={`sent-message ${message.sender === 'user' ? 'client' : 'bot'}`}>
+                {message.text}
+              </div>
             ))}
             <div ref={messagesEndRef}/>
           </div>

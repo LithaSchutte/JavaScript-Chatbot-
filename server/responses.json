@@ -9,6 +9,10 @@
     "no": {
       "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire rotations, and more.",
       "switch": "service"
+    },
+    "default": {
+      "answer": "I didn't understand that. Are you looking for a new car today?",
+      "switch": "begin"
     }
   },
   "general": {
@@ -27,41 +31,131 @@
     "information": {
       "answer": "I'd be happy to provide you with information. What specific information are you looking for?",
       "switch": "begin"
+    },
+    "default": {
+      "answer": "I didn't catch that. How can I help you today?",
+      "switch": "begin"
     }
   },
   "brand_selection": {
     "audi": {
       "answer": "Audi is a great choice! Are you interested in any specific models?",
-      "switch": "browsing"
+      "switch": "audi_models"
     },
     "bmw": {
       "answer": "BMW offers a blend of performance and luxury. Are you interested in any specific models?",
-      "switch": "browsing"
+      "switch": "bmw_models"
     },
     "mercedes": {
       "answer": "Mercedes is known for its luxury and performance. Are you interested in any specific models?",
-      "switch": "browsing"
+      "switch": "mercedes_models"
     },
-    "other": {
-      "answer": "We have a variety of other brands as well. What are you specifically looking for?",
-      "switch": "browsing"
+    "toyota": {
+      "answer": "Toyota is known for its reliability. Are you interested in any specific models?",
+      "switch": "toyota_models"
+    },
+    "hyundai": {
+      "answer": "Hyundai offers great value. Are you interested in any specific models?",
+      "switch": "hyundai_models"
+    },
+    "fiat": {
+      "answer": "Fiat has a unique style. Are you interested in any specific models?",
+      "switch": "fiat_models"
+    },
+    "no": {
+      "answer": "Looks like we don't have the car you're looking for. Can I perhaps interest you with maintenance services for your current car?",
+      "switch": "service"
+    },
+    "default": {
+      "answer": "I'm sorry, we don't have that brand. Can I help you with another brand?",
+      "switch": "brand_selection"
     }
   },
-  "browsing": {
-    "models": {
-      "answer": "Great! What specific models are you interested in? We have a variety of models to suit different needs and budgets.",
+  "audi_models": {
+    "a4": {
+      "answer": "The Audi A4 is a great choice! Would you like to schedule a test drive or learn more about financing options?",
       "switch": "next_step"
     },
-    "price": {
-      "answer": "Price range is an important factor. What is your preferred price range for your new car?",
+    "q5": {
+      "answer": "The Audi Q5 is an excellent SUV. Would you like to schedule a test drive or learn more about financing options?",
       "switch": "next_step"
     },
-    "features": {
-      "answer": "Tell me more about the features you're looking for, and I'll narrow down our selection to match your preferences.",
+    "default": {
+      "answer": "I'm sorry, we currently don't have that Audi model. Can I help you with another Audi model?",
+      "switch": "audi_models"
+    }
+  },
+  "bmw_models": {
+    "x3": {
+      "answer": "The BMW X3 is a fantastic choice! Would you like to schedule a test drive or learn more about financing options?",
       "switch": "next_step"
+    },
+    "3_series": {
+      "answer": "The BMW 3 Series is known for its performance. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "default": {
+      "answer": "I'm sorry, we currently don't have that BMW model. Can I help you with another BMW model?",
+      "switch": "bmw_models"
+    }
+  },
+  "mercedes_models": {
+    "c_class": {
+      "answer": "The Mercedes C-Class is a popular model. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "gle": {
+      "answer": "The Mercedes GLE is a versatile SUV. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "default": {
+      "answer": "I'm sorry, we currently don't have that Mercedes model. Can I help you with another Mercedes model?",
+      "switch": "mercedes_models"
+    }
+  },
+  "toyota_models": {
+    "camry": {
+      "answer": "The Toyota Camry is a great choice for reliability and comfort. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "rav4": {
+      "answer": "The Toyota RAV4 is a versatile SUV. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "default": {
+      "answer": "I'm sorry, we currently don't have that Toyota model. Can I help you with another Toyota model?",
+      "switch": "toyota_models"
+    }
+  },
+  "hyundai_models": {
+    "elantra": {
+      "answer": "The Hyundai Elantra is a great choice for economy and style. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "tucson": {
+      "answer": "The Hyundai Tucson is a great SUV option. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "default": {
+      "answer": "I'm sorry, we currently don't have that Hyundai model. Can I help you with another Hyundai model?",
+      "switch": "hyundai_models"
+    }
+  },
+  "fiat_models": {
+    "500": {
+      "answer": "The Fiat 500 is a stylish and compact car. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
+    },
+    "default": {
+      "answer": "I'm sorry, we currently don't have that Fiat model. Can I help you with another Fiat model?",
+      "switch": "fiat_models"
     }
   },
   "service": {
+    "yes": {
+      "answer": "What kind of service do you need?",
+      "switch": "maintenance"
+    },
     "appointment": {
       "answer": "I'd be happy to schedule an appointment for you. What kind of service do you need?",
       "switch": "confirming"
@@ -73,6 +167,40 @@
     "repair": {
       "answer": "If your car is experiencing any issues, please describe the problem and we'll schedule a repair appointment for you.",
       "switch": "confirming"
+    },
+    "oil": {
+      "answer": "Noted. Do you want to make a service appointment to check the oil? What time and day suits you?",
+      "switch": "appointment"
+    },
+    "tire": {
+      "answer": "Noted. Do you want to make a service appointment for tire rotations? What time and day suits you?",
+      "switch": "appointment"
+    },
+    "brake": {
+      "answer": "Noted. Let's make an appointment. What time and day suits you?",
+      "switch": "appointment"
+    },
+    "default": {
+      "answer": "I'm sorry, I didn't understand that. Would you like to schedule a service appointment?",
+      "switch": "service"
+    }
+  },
+  "maintenance": {
+    "oil": {
+      "answer": "An oil change helps maintain engine performance and longevity. When was your last oil change?",
+      "switch": "confirming"
+    },
+    "tire": {
+      "answer": "Regular tire rotations ensure even wear and extend tire life. When was your last tire rotation?",
+      "switch": "confirming"
+    },
+    "brake": {
+      "answer": "Brake service is essential for safety. Are you experiencing any issues with your brakes?",
+      "switch": "confirming"
+    },
+    "default": {
+      "answer": "I'm sorry, we don't offer that specific maintenance service. Can I assist you with another service?",
+      "switch": "maintenance"
     }
   },
   "next_step": {
@@ -83,23 +211,34 @@
     "financing": {
       "answer": "Great! Let's discuss your credit score, desired down payment, and monthly payment preferences.",
       "switch": "confirming"
+    },
+    "default": {
+      "answer": "I didn't catch that. Would you like to schedule a test drive or learn more about financing options?",
+      "switch": "next_step"
     }
   },
   "confirming": {
     "test_drive": {
-      "answer": "Your test drive is scheduled for [time]. Thank you! Is there anything else I can assist you with?",
+      "answer": "Great! Your test drive is scheduled. Thank you! Is there anything else I can assist you with?",
       "switch": "end"
     },
     "financing": {
-      "answer": "You provided the following details for financing: [details]. Thank you! Is there anything else I can assist you with?",
+      "answer": "Thank you! Is there anything else I can assist you with?",
       "switch": "end"
     },
     "service_time": {
-      "answer": "Your appointment is scheduled for [time]. Thank you! Is there anything else I can assist you with?",
+      "answer": "Your appointment is scheduled. Thank you! Is there anything else I can assist you with?",
       "switch": "end"
+    },
+    "default": {
+      "answer": "I didn't understand that. Can I assist you with anything else?",
+      "switch": "confirming"
     }
   },
   "end": {
-    "response": "Thank you for visiting IntelliDrive Motors! Have a great day!"
+    "response": "Thank you for visiting IntelliDrive Motors! Have a great day!",
+    "default": {
+      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!"
+    }
   }
 }
