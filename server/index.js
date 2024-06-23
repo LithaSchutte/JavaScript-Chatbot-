@@ -2,6 +2,7 @@
 const http = require("http");
 const {join} = require("path");
 const socketIo = require("socket.io");
+const WebSocket = require("ws")
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
@@ -38,7 +39,7 @@ io.on("connection", (socket) => {
     console.log("New client connected");
     userStates[socket.id] = {};
 
-    socket.emit("receiveMessage", {response: "Welcome to [Dealership Name]! Are you looking for a new car today?"});
+    socket.emit("receiveMessage", {response: responses.default});
 
     socket.on("sendMessage", (message) => {
         let response;

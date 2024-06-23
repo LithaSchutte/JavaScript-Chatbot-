@@ -1,38 +1,105 @@
 {
+  "default": "Welcome to IntelliDrive Motors! Are you looking for a new car today?",
+  "car_brands": ["Toyota", "Hyundai", "Fiat", "Audi", "BMW", "Mercedes"],
   "begin": {
-    "default": "Welcome to [Dealership Name]! Are you looking for a new car today?",
     "yes": {
-        "answer": "Great! What kind of car are you interested in? We have a wide selection of [Car Brands].",
-        "switch": "general"
+      "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
+      "switch": "brand_selection"
     },
-    "no": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire rotations, and more."
+    "no": {
+      "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire rotations, and more.",
+      "switch": "service"
+    }
   },
   "general": {
     "hello": {
-      "answer": "Hello there! Welcome to [Dealership Name]. How can I help you today?",
+      "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
       "switch": "begin"
     },
-    "hi": "Hi there! Welcome to [Dealership Name]. How can I assist you today?",
-    "help": "Sure, I'm happy to help. What can I answer for you today?",
-    "information": "I'd be happy to provide you with information. What specific information are you looking for?"
+    "hi": {
+      "answer": "Hi there! Welcome to IntelliDrive Motors. How can I assist you today?",
+      "switch": "begin"
+    },
+    "help": {
+      "answer": "Sure, I'm happy to help. What can I answer for you today?",
+      "switch": "begin"
+    },
+    "information": {
+      "answer": "I'd be happy to provide you with information. What specific information are you looking for?",
+      "switch": "begin"
+    }
+  },
+  "brand_selection": {
+    "audi": {
+      "answer": "Audi is a great choice! Are you interested in any specific models?",
+      "switch": "browsing"
+    },
+    "bmw": {
+      "answer": "BMW offers a blend of performance and luxury. Are you interested in any specific models?",
+      "switch": "browsing"
+    },
+    "mercedes": {
+      "answer": "Mercedes is known for its luxury and performance. Are you interested in any specific models?",
+      "switch": "browsing"
+    },
+    "other": {
+      "answer": "We have a variety of other brands as well. What are you specifically looking for?",
+      "switch": "browsing"
+    }
   },
   "browsing": {
-    "models": "Great! What specific models are you interested in? We have a variety of models to suit different needs and budgets.",
-    "price": "Price range is an important factor. What is your preferred price range for your new car?",
-    "features": "Tell me more about the features you're looking for, and I'll narrow down our selection to match your preferences."
+    "models": {
+      "answer": "Great! What specific models are you interested in? We have a variety of models to suit different needs and budgets.",
+      "switch": "next_step"
+    },
+    "price": {
+      "answer": "Price range is an important factor. What is your preferred price range for your new car?",
+      "switch": "next_step"
+    },
+    "features": {
+      "answer": "Tell me more about the features you're looking for, and I'll narrow down our selection to match your preferences.",
+      "switch": "next_step"
+    }
   },
   "service": {
-    "appointment": "I'd be happy to schedule an appointment for you. What kind of service do you need?",
-    "maintenance": "Regular maintenance is crucial for keeping your car in top condition. We recommend scheduling maintenance services every [Mileage Interval] miles.",
-    "repair": "If your car is experiencing any issues, please describe the problem and we'll schedule a repair appointment for you."
+    "appointment": {
+      "answer": "I'd be happy to schedule an appointment for you. What kind of service do you need?",
+      "switch": "confirming"
+    },
+    "maintenance": {
+      "answer": "Regular maintenance is crucial for keeping your car in top condition. We recommend scheduling maintenance services every [Mileage Interval] miles.",
+      "switch": "confirming"
+    },
+    "repair": {
+      "answer": "If your car is experiencing any issues, please describe the problem and we'll schedule a repair appointment for you.",
+      "switch": "confirming"
+    }
   },
   "next_step": {
-    "test_drive": "Absolutely! Please provide a convenient time for your test drive.",
-    "financing": "Great! Let's discuss your credit score, desired down payment, and monthly payment preferences."
+    "test_drive": {
+      "answer": "Absolutely! Please provide a convenient time for your test drive.",
+      "switch": "confirming"
+    },
+    "financing": {
+      "answer": "Great! Let's discuss your credit score, desired down payment, and monthly payment preferences.",
+      "switch": "confirming"
+    }
   },
   "confirming": {
-    "test_drive": "Your test drive is scheduled for [time]. Thank you! Is there anything else I can assist you with?",
-    "financing": "You provided the following details for financing: [details]. Thank you! Is there anything else I can assist you with?",
-    "service_time": "Your appointment is scheduled for [time]. Thank you! Is there anything else I can assist you with?"
+    "test_drive": {
+      "answer": "Your test drive is scheduled for [time]. Thank you! Is there anything else I can assist you with?",
+      "switch": "end"
+    },
+    "financing": {
+      "answer": "You provided the following details for financing: [details]. Thank you! Is there anything else I can assist you with?",
+      "switch": "end"
+    },
+    "service_time": {
+      "answer": "Your appointment is scheduled for [time]. Thank you! Is there anything else I can assist you with?",
+      "switch": "end"
+    }
+  },
+  "end": {
+    "response": "Thank you for visiting IntelliDrive Motors! Have a great day!"
   }
 }
