@@ -43,28 +43,37 @@ io.on("connection", (socket) => {
     socket.on("sendMessage", (message) => {
         let response;
         const lowerMessage = message.toLowerCase();
+
         if (!userStates[socket.id].context) {
             userStates[socket.id].context = "begin";
         }
 
-        // Check basic keywords first
-        if (responses.basic_keywords && responses.basic_keywords[lowerMessage]) {
-            const responseData = responses.basic_keywords[lowerMessage];
-
-            if (typeof responseData === "string") {
-                response = responseData; // Handle simple string response
-            } else if (typeof responseData === "object" && responseData.answer) {
-                response = responseData.answer; // Handle structured response with "answer"
-
-                // Update context based on "switch" field in the response
-                if (responseData.switch) {
-                    userStates[socket.id].context = responseData.switch;
+        const findResponse = (keywords, context) => {
+            for (let phrase in keywords[context]) {
+                const regex = new RegExp(`\\b${phrase}\\b`, 'i');
+                if (regex.test(lowerMessage)) {
+                    return keywords[context][phrase];
                 }
             }
-        } else if (responses[userStates[socket.id].context] && responses[userStates[socket.id].context][lowerMessage]) {
-            // Fall back to context-specific responses
-            const responseData = responses[userStates[socket.id].context][lowerMessage];
+            return null;
+        };
 
+        // Check context-specific responses first
+        let responseData = findResponse(responses, userStates[socket.id].context);
+
+        if (!responseData) {
+            // Check basic keywords if context-specific response not found
+            responseData = findResponse(responses, 'basic_keywords');
+        }
+
+        if (!responseData) {
+            // Use default response in the current context if no match found
+            if (responses[userStates[socket.id].context] && responses[userStates[socket.id].context].default) {
+                responseData = responses[userStates[socket.id].context].default;
+            }
+        }
+
+        if (responseData) {
             if (typeof responseData === "string") {
                 response = responseData; // Handle simple string response
             } else if (typeof responseData === "object" && responseData.answer) {
@@ -76,6 +85,7 @@ io.on("connection", (socket) => {
                 }
             }
         } else {
+            // Fallback response if no specific or default response found
             response = "I'm sorry, I didn't understand that.";
         }
 
