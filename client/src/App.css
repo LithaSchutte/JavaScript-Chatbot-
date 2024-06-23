@@ -59,7 +59,7 @@ header {
 }
 
 #main-div::before {
-    content: "Internet Technologies Chatbot";
+    content: "IntelliDrive Motors Chatbot";
     position: absolute;
     top: 50%;
     left: 50%;

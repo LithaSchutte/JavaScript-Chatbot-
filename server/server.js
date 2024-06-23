@@ -2,7 +2,7 @@
 const http = require("http");
 const {join} = require("path");
 const socketIo = require("socket.io");
-const WebSocket = require("ws");
+const WebSocket = require("ws")
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
@@ -15,8 +15,8 @@ app.get("/", (req, res) => {
     res.sendFile(join(__dirname, '../client/build/index.html'));
 });
 
-const filePath = 'responses.json';
-let responses = {};
+const filePath = 'responses.json'
+let responses = {}
 
 fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -31,6 +31,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
         console.error('Error parsing JSON:', err);
     }
 });
+
 
 const userStates = {};
 
@@ -47,11 +48,8 @@ io.on("connection", (socket) => {
             userStates[socket.id].context = "begin";
         }
 
-        const currentContext = userStates[socket.id].context;
-        const currentResponses = responses[currentContext] || {};
-
-        if (currentResponses[lowerMessage]) {
-            const responseData = currentResponses[lowerMessage];
+        if (responses[userStates[socket.id].context] && responses[userStates[socket.id].context][lowerMessage]) {
+            const responseData = responses[userStates[socket.id].context][lowerMessage];
 
             if (typeof responseData === "string") {
                 response = responseData; // Handle simple string response
@@ -62,11 +60,6 @@ io.on("connection", (socket) => {
                 if (responseData.switch) {
                     userStates[socket.id].context = responseData.switch;
                 }
-            }
-        } else if (currentResponses.default) {
-            response = currentResponses.default.answer;
-            if (currentResponses.default.switch) {
-                userStates[socket.id].context = currentResponses.default.switch;
             }
         } else {
             response = "I'm sorry, I didn't understand that.";
