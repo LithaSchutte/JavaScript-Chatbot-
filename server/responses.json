@@ -61,6 +61,14 @@
       "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
       "switch": "brand_selection"
     },
+    "car": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "buy": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
     "accident": {
       "answer": "I'm sorry to hear that. Do you want to schedule an appointment?",
       "switch": "appointment"
@@ -358,6 +366,14 @@
     "default": {
       "answer": "Your appointment is confirmed. Can I assist with anything else?",
       "switch": "service"
+    },
+    "no": {
+      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
+      "switch": "end"
+    },
+    "yes": {
+      "answer": "Sure, I'd love to help. Do you want to buy a new car or schedule maintenance services?",
+      "switch": "basic_keywords"
     }
   },
   "next_step": {
