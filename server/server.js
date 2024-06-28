@@ -37,6 +37,7 @@ const userStates = {};
 io.on("connection", (socket) => {
     console.log("New client connected");
     userStates[socket.id] = {};
+    let counter = 0;
 
     socket.emit("receiveMessage", { response: responses.default });
 
@@ -58,10 +59,21 @@ io.on("connection", (socket) => {
             return null;
         };
 
+
+        function hardFallBack() {
+            counter = counter + 1
+            console.log(counter)
+            if (counter > 3) {
+                console.log("Hard Fall Back")
+            }
+        }
+
         // Check context-specific responses first
         let responseData = findResponse(responses, userStates[socket.id].context);
 
-        if (!responseData) {
+        if (userStates[socket.id].context === "restart") {
+            responseData = findResponse(responses, "restart")
+        } else if (!responseData) {
             // Check basic keywords if context-specific response not found
             responseData = findResponse(responses, 'basic_keywords');
         }
@@ -70,6 +82,7 @@ io.on("connection", (socket) => {
             // Use default response in the current context if no match found
             if (responses[userStates[socket.id].context] && responses[userStates[socket.id].context].default) {
                 responseData = responses[userStates[socket.id].context].default;
+                hardFallBack();
             }
         }
 
@@ -89,7 +102,9 @@ io.on("connection", (socket) => {
             response = "I'm sorry, I didn't understand that.";
         }
 
+
         socket.emit("receiveMessage", { message, response });
+        console.log(userStates[socket.id].context)
     });
 
     socket.on("disconnect", () => {

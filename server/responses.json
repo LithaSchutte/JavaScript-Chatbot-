@@ -1,5 +1,5 @@
 {
-  "default": "Welcome to IntelliDrive Motors! Are you looking for a new car today?",
+  "default": "Hello there, welcome to IntelliDrive Motors, how can I help you today? Are you looking for a new car?",
   "basic_keywords": {
     "okay": {
       "answer": "What kind of service do you need? We offer maintenance, repairs and much more",
@@ -16,84 +16,6 @@
     "don't": {
       "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
       "switch": "service"
-    },
-    "hello": {
-      "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
-      "switch": "begin"
-    },
-    "hi": {
-      "answer": "Hi there! Welcome to IntelliDrive Motors. How can I assist you today?",
-      "switch": "begin"
-    },
-    "help": {
-      "answer": "Sure, I'm happy to help. What can I answer for you today?",
-      "switch": "begin"
-    },
-    "information": {
-      "answer": "I'd be happy to provide you with information. What specific information are you looking for?",
-      "switch": "begin"
-    },
-    "test_drive": {
-      "answer": "Would you like to schedule a test drive for any of our available models?",
-      "switch": "next_step"
-    },
-    "financing": {
-      "answer": "Are you interested in learning more about financing options for a new car?",
-      "switch": "next_step"
-    },
-    "maintenance": {
-      "answer": "Is there any specific maintenance service you're interested in, such as oil change, tire services, or brake service?",
-      "switch": "service"
-    },
-    "appointment": {
-      "answer": "Would you like to schedule a service appointment?",
-      "switch": "service"
-    },
-    "service": {
-      "answer": "Would you like to schedule a service appointment?",
-      "switch": "service"
-    },
-    "model": {
-      "answer": "Can I provide you with information about specific car models?",
-      "switch": "begin"
-    },
-    "brands": {
-      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
-      "switch": "brand_selection"
-    },
-    "new": {
-      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
-      "switch": "brand_selection"
-    },
-    "buy": {
-      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
-      "switch": "brand_selection"
-    },
-    "accident": {
-      "answer": "I'm sorry to hear that. Do you want to schedule an appointment?",
-      "switch": "appointment"
-    },
-    "yes": {
-      "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
-      "switch": "brand_selection"
-    }
-  },
-  "selection": {
-    "okay": {
-      "answer": "What kind of service do you need? We offer maintenance, repairs and much more",
-      "switch": "service"
-    },
-    "no": {
-      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
-      "switch": "restart"
-    },
-    "not": {
-      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
-      "switch": "end"
-    },
-    "don't": {
-      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
-      "switch": "end"
     },
     "hello": {
       "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
@@ -152,8 +74,86 @@
       "switch": "appointment"
     },
     "yes": {
+      "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
+      "switch": "brand_selection"
+    }
+  },
+  "selection": {
+    "okay": {
+      "answer": "What kind of service do you need? We offer maintenance, repairs and much more",
+      "switch": "service"
+    },
+    "yes": {
       "answer": "Please let me know how I can be of service. I can schedule a service appointment, book a test drive or give you information about the cars we offer",
       "switch": "selection"
+    },
+    "no": {
+      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
+      "switch": "restart"
+    },
+    "not": {
+      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
+      "switch": "restart"
+    },
+    "don't": {
+      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
+      "switch": "restart"
+    },
+    "hello": {
+      "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
+      "switch": "begin"
+    },
+    "hi": {
+      "answer": "Hi there! Welcome to IntelliDrive Motors. How can I assist you today?",
+      "switch": "begin"
+    },
+    "help": {
+      "answer": "Sure, I'm happy to help. What can I answer for you today?",
+      "switch": "begin"
+    },
+    "information": {
+      "answer": "I'd be happy to provide you with information. What specific information are you looking for?",
+      "switch": "begin"
+    },
+    "test": {
+      "answer": "Would you like to schedule a test drive for any of our available models?",
+      "switch": "next_step"
+    },
+    "financing": {
+      "answer": "Are you interested in learning more about financing options for a new car?",
+      "switch": "next_step"
+    },
+    "maintenance": {
+      "answer": "Is there any specific maintenance service you're interested in, such as oil change, tire services, or brake service?",
+      "switch": "service"
+    },
+    "appointment": {
+      "answer": "Would you like to schedule a service appointment?",
+      "switch": "service"
+    },
+    "service": {
+      "answer": "Would you like to schedule a service appointment?",
+      "switch": "service"
+    },
+    "model": {
+      "answer": "Can I provide you with information about specific car models?",
+      "switch": "begin"
+    },
+    "brands": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "new": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "buy": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "accident": {
+      "answer": "I'm sorry to hear that. Do you want to schedule an appointment?",
+      "switch": "appointment"
     }
   },
   "begin": {
@@ -516,14 +516,14 @@
   },
   "repair": {
     "default": {
-      "answer": "I understood your problem. Let's schedule an appointment to fix the issue. Please select a suitable time and day.",
+      "answer": "I understand your problem. Let's schedule an appointment to fix the issue. Please select a suitable time and day.",
       "switch": "confirming_appointment"
     }
   },
   "confirming_appointment": {
     "default": {
-      "answer": "Your appointment is confirmed. Can I assist with anything else?",
-      "switch": "confirming_appointment"
+      "answer": "Okay, we acknowledge your requested time, a consultant will contact you to confirm. Can I assist with anything else?",
+      "switch": "selection"
     },
     "no": {
       "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
@@ -545,27 +545,15 @@
   "next_step": {
     "test": {
       "answer": "Absolutely! Please provide a convenient time for your test drive.",
-      "switch": "confirming_drive"
+      "switch": "confirming_appointment"
     },
     "financing": {
-      "answer": "Great! Let's discuss your credit score, desired down payment, and monthly payment preferences.",
-      "switch": "financing"
+      "answer": "Perhaps it's better to discuss this in more depth over telephone. Let's make an appointment. Choose a convenient time that would suit you.",
+      "switch": "confirming_appointment"
     },
     "default": {
       "answer": "I didn't catch that. Would you like to schedule a test drive or learn more about financing options?",
       "switch": "next_step"
-    }
-  },
-  "financing": {
-    "default": {
-      "answer": "Perhaps it's better to discuss this in more depth over telephone. Let's make an appointment. Choose a convenient time that would suit you.",
-      "switch": "appointment"
-    }
-  },
-  "confirming_drive": {
-    "default": {
-      "answer": "Perfect. See you then! Can I help you with anything else?",
-      "switch": "begin"
     }
   },
   "confirming": {
@@ -603,11 +591,11 @@
   "restart": {
     "hi": {
       "answer": "Hello there, welcome to IntelliDrive Motors, how can I help you today? Are you looking for a new car?",
-      "switch": "basic_keywords"
+      "switch": "default"
     },
     "hello": {
       "answer": "Hello there, welcome to IntelliDrive Motors, how can I help you today? Are you looking for a new car?",
-      "switch": "basic_keywords"
+      "switch": "default"
     },
     "default": {
       "answer": "Just say \"Hi\" or \"Hello\" to restart the conversation!",
