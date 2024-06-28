@@ -84,16 +84,16 @@
       "switch": "service"
     },
     "no": {
-      "answer": "No problem! You can come back at any time! Just say \"Hi\" or \"Hello\" to restart the conversation! ",
-      "switch": "selection"
+      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
+      "switch": "restart"
     },
     "not": {
-      "answer": "No problem! You can come back at any time! Just say \"Hi\" or \"Hello\" to restart the conversation! ",
-      "switch": "selection"
+      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
+      "switch": "end"
     },
     "don't": {
-      "answer": "No problem! You can come back at any time! Just say \"Hi\" or \"Hello\" to restart the conversation! ",
-      "switch": "selection"
+      "answer": "No problem! You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation. ",
+      "switch": "end"
     },
     "hello": {
       "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
@@ -596,7 +596,22 @@
   },
   "end": {
     "default": {
-      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!"
+      "answer": "Thank you for visiting IntelliDrive Motors! We wish you a great day. You can come back at any time. Just say \"Hi\" or \"Hello\" to restart the conversation!",
+      "switch": "restart"
+    }
+  },
+  "restart": {
+    "hi": {
+      "answer": "Hello there, welcome to IntelliDrive Motors, how can I help you today? Are you looking for a new car?",
+      "switch": "basic_keywords"
+    },
+    "hello": {
+      "answer": "Hello there, welcome to IntelliDrive Motors, how can I help you today? Are you looking for a new car?",
+      "switch": "basic_keywords"
+    },
+    "default": {
+      "answer": "Just say \"Hi\" or \"Hello\" to restart the conversation!",
+      "switch": "restart"
     }
   }
 }
