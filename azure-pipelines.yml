@@ -7,29 +7,29 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
   inputs:
     versionSource: 'spec'
-    versionSpec: '20.x'
+    versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - task: Npm@1
-  displayName: "Installing Modules in /client"
+  displayName: "Install Client Dependencies"
   inputs:
     command: 'install'
     workingDir: 'client'
 
 - task: Npm@1
-  displayName: "Installing Modules in /server"
+  displayName: "Install Server Dependencies"
   inputs:
     command: 'install'
     workingDir: 'server'
 
 - task: Npm@1
-  displayName: "Building Modules in /client"
+  displayName: "Build Client"
   inputs:
     command: 'custom'
     workingDir: 'client'
@@ -38,13 +38,14 @@ steps:
 - task: CopyFiles@2
   inputs:
     Contents: |
-      client/public/**
       client/src/**
+      client/public/**
       server/**
     TargetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'release'
+    ArtifactName: 'drop'
     publishLocation: 'Container'
+
