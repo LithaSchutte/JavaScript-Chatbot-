@@ -1,15 +1,19 @@
 {
   "default": "Welcome to IntelliDrive Motors! Are you looking for a new car today?",
   "basic_keywords": {
-    "yes": {
-      "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
-      "switch": "brand_selection"
-    },
     "okay": {
       "answer": "What kind of service do you need? We offer maintenance, repairs and much more",
       "switch": "service"
     },
     "no": {
+      "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
+      "switch": "service"
+    },
+    "not": {
+      "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
+      "switch": "service"
+    },
+    "don't": {
       "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
       "switch": "service"
     },
@@ -61,7 +65,81 @@
       "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
       "switch": "brand_selection"
     },
-    "car": {
+    "buy": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "accident": {
+      "answer": "I'm sorry to hear that. Do you want to schedule an appointment?",
+      "switch": "appointment"
+    },
+    "yes": {
+      "answer": "Great! What kind of car are you interested in? We have a wide selection of brands such as Audi, BMW, and Mercedes. Are you interested in any other brand?",
+      "switch": "brand_selection"
+    }
+  },
+  "selection": {
+    "okay": {
+      "answer": "What kind of service do you need? We offer maintenance, repairs and much more",
+      "switch": "service"
+    },
+    "no": {
+      "answer": "No problem! You can come back at any time! Just say \"Hi\" or \"Hello\" to restart the conversation! ",
+      "switch": "selection"
+    },
+    "not": {
+      "answer": "No problem! You can come back at any time! Just say \"Hi\" or \"Hello\" to restart the conversation! ",
+      "switch": "selection"
+    },
+    "don't": {
+      "answer": "No problem! You can come back at any time! Just say \"Hi\" or \"Hello\" to restart the conversation! ",
+      "switch": "selection"
+    },
+    "hello": {
+      "answer": "Hello there! Welcome to IntelliDrive Motors. How can I help you today?",
+      "switch": "begin"
+    },
+    "hi": {
+      "answer": "Hi there! Welcome to IntelliDrive Motors. How can I assist you today?",
+      "switch": "begin"
+    },
+    "help": {
+      "answer": "Sure, I'm happy to help. What can I answer for you today?",
+      "switch": "begin"
+    },
+    "information": {
+      "answer": "I'd be happy to provide you with information. What specific information are you looking for?",
+      "switch": "begin"
+    },
+    "test": {
+      "answer": "Would you like to schedule a test drive for any of our available models?",
+      "switch": "next_step"
+    },
+    "financing": {
+      "answer": "Are you interested in learning more about financing options for a new car?",
+      "switch": "next_step"
+    },
+    "maintenance": {
+      "answer": "Is there any specific maintenance service you're interested in, such as oil change, tire services, or brake service?",
+      "switch": "service"
+    },
+    "appointment": {
+      "answer": "Would you like to schedule a service appointment?",
+      "switch": "service"
+    },
+    "service": {
+      "answer": "Would you like to schedule a service appointment?",
+      "switch": "service"
+    },
+    "model": {
+      "answer": "Can I provide you with information about specific car models?",
+      "switch": "begin"
+    },
+    "brands": {
+      "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
+      "switch": "brand_selection"
+    },
+    "new": {
       "answer": "We offer a variety of brands including Audi, BMW, Mercedes, Toyota, Hyundai, and Fiat. Which brand are you interested in?",
       "switch": "brand_selection"
     },
@@ -72,6 +150,10 @@
     "accident": {
       "answer": "I'm sorry to hear that. Do you want to schedule an appointment?",
       "switch": "appointment"
+    },
+    "yes": {
+      "answer": "Please let me know how I can be of service. I can schedule a service appointment, book a test drive or give you information about the cars we offer",
+      "switch": "selection"
     }
   },
   "begin": {
@@ -80,6 +162,14 @@
       "switch": "brand_selection"
     },
     "no": {
+      "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
+      "switch": "service"
+    },
+    "not": {
+      "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
+      "switch": "service"
+    },
+    "don't": {
       "answer": "No problem! Perhaps you'd like to schedule a service appointment? We offer oil changes, tire services, and more.",
       "switch": "service"
     },
@@ -118,11 +208,19 @@
       "switch": "fiat_models"
     },
     "no": {
-      "answer": "Looks like we don't have the car you're looking for. Can I perhaps interest you with maintenance services for your current car?",
+      "answer": "Okay, let's see if I can help with anything else, perhaps I can interest you with maintenance services for your current car?",
+      "switch": "service"
+    },
+    "not": {
+      "answer": "Okay, let's see if I can help with anything else, perhaps I can interest you with maintenance services for your current car?",
+      "switch": "service"
+    },
+    "don't": {
+      "answer": "Okay, let's see if I can help with anything else, perhaps I can interest you with maintenance services for your current car?",
       "switch": "service"
     },
     "default": {
-      "answer": "I'm sorry, we don't have that brand. Can I help you with another brand?",
+      "answer": "I'm sorry, it seems like we don't currently have what you're looking for. Can I help you with another brand?",
       "switch": "brand_selection"
     }
   },
@@ -136,6 +234,14 @@
       "switch": "next_step"
     },
     "no": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+   "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
@@ -181,9 +287,13 @@
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
-    "yes": {
-      "answer": "Some of the modles we have available are the 911 and the Cayenne",
-      "switch": "porsche_models"
+    "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
     },
     "default": {
       "answer": "I'm sorry, we currently don't have that Porsche model. Can I help you with another Porsche model?",
@@ -204,6 +314,14 @@
       "switch": "bmw_models"
     },
     "no": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
@@ -229,6 +347,14 @@
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
+    "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
     "default": {
       "answer": "I'm sorry, we currently don't have that Mercedes model. Can I help you with another Mercedes model?",
       "switch": "mercedes_models"
@@ -251,6 +377,14 @@
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
+    "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
     "yes": {
       "answer": "The models we currently have available are the Camry and the Rav4",
       "switch": "toyota_models"
@@ -266,6 +400,14 @@
       "switch": "next_step"
     },
     "no": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
@@ -287,6 +429,14 @@
       "answer": "Would you prefer another brand?",
       "switch": "brand_selection"
     },
+    "not": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
+    "don't": {
+      "answer": "Would you prefer another brand?",
+      "switch": "brand_selection"
+    },
     "yes": {
       "answer": "One of the models we currently have available are the 500.",
       "switch": "fiat_models"
@@ -302,8 +452,16 @@
       "switch": "service"
     },
     "no": {
-      "answer": "Sorry I wasn't able to help. Do you need anything else?",
-      "switch": "end"
+      "answer": "Okay, do you need anything else or do you have any questions?",
+      "switch": "selection"
+    },
+    "not": {
+      "answer": "Okay, do you need anything else or do you have any questions?",
+      "switch": "selection"
+    },
+    "don't": {
+      "answer": "Okay, do you need anything else or do you have any questions?",
+      "switch": "selection"
     },
     "okay": {
       "answer": "What kind of service do you need? We offer maintenance, repairs and much more",
@@ -365,9 +523,17 @@
   "confirming_appointment": {
     "default": {
       "answer": "Your appointment is confirmed. Can I assist with anything else?",
-      "switch": "service"
+      "switch": "confirming_appointment"
     },
     "no": {
+      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
+      "switch": "end"
+    },
+    "not": {
+      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
+      "switch": "end"
+    },
+    "don't": {
       "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
       "switch": "end"
     },
@@ -415,13 +581,20 @@
       "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
       "switch": "end"
     },
+    "not": {
+      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
+      "switch": "end"
+    },
+    "don't": {
+      "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!",
+      "switch": "end"
+    },
     "default": {
       "answer": "Confirmed. Can I assist you with anything else?",
       "switch": "confirming"
     }
   },
   "end": {
-    "response": "Thank you for visiting IntelliDrive Motors! Have a great day!",
     "default": {
       "answer": "Thank you for visiting IntelliDrive Motors! Have a great day!"
     }
