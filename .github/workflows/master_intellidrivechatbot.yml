@@ -18,10 +18,6 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Upload artifact
-        run: |
-          find . -type f | xargs -P 10 -n 1000 gh run upload-artifact --path .
-
       - name: npm install, build, and test
         run: |
           npm ci
