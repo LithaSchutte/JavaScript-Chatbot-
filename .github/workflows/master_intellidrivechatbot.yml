@@ -15,6 +15,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Increase open file limit
+        run: ulimit -n 4096  # Adjust the open file limit as needed
 
       - name: Set up Node.js version
         uses: actions/setup-node@v4
