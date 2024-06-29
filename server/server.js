@@ -64,8 +64,8 @@ io.on("connection", (socket) => {
             if (userStates[socket.id].counter >= 4) {
                 console.log("Hard Fall Back");
                 // Send hard fallback response and reset the counter
-                response = "It seems like we're having trouble understanding each other. Please try rephrasing your question.";
-                userStates[socket.id].counter = 0; // Reset counter
+                // response = "It seems like we're having trouble understanding each other. Please try rephrasing your question.";
+                // userStates[socket.id].counter = 0; // Reset counter
             }
         }
 
@@ -106,6 +106,10 @@ io.on("connection", (socket) => {
 
         socket.emit("receiveMessage", { message, response });
         console.log(userStates[socket.id].context);
+        if (userStates[socket.id].counter === 4) {
+            io.to(socket.id).emit('refresh page');
+        }
+
     });
 
     socket.on("disconnect", () => {

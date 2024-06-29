@@ -18,6 +18,10 @@ function App() {
       setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);
     });
 
+    socketRef.current.on('refresh page', () => {
+      location.reload();
+    })
+
     return () => {
       socketRef.current.disconnect();
     };
