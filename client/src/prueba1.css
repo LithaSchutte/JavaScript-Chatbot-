@@ -38,20 +38,26 @@ nav a {
     font-weight: 300;
 }
 
-/* Hero Section */
-#hero {
-    background: url('hero-image.jpg') no-repeat center center/cover;
+/* Chatbot Section */
+#chatbot {
+    background: url('../images/your-background-image.jpg') no-repeat center center/cover;
     color: #fff;
     text-align: center;
-    padding: 100px 0;
+    padding: 150px 0;
+    position: relative;
 }
 
-#hero h2 {
+#chatbot .container {
+    position: relative;
+    z-index: 1;
+}
+
+#chatbot h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-#hero p {
+#chatbot p {
     font-size: 1.2em;
 }
 
@@ -65,13 +71,13 @@ nav a {
 }
 
 /* Car Models Section */
-#car-models {
+#car_models {
     background-color: #fff;
     padding: 50px 0;
     text-align: center;
 }
 
-#car-models h2 {
+#car_models h2 {
     font-size: 2em;
     margin-bottom: 40px;
 }
