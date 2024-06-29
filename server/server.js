@@ -3,6 +3,7 @@ const http = require("http");
 const { join } = require("path");
 const socketIo = require("socket.io");
 const fs = require("fs");
+const {promisify} = require("util");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -18,19 +19,17 @@ app.get("/", (req, res) => {
 const filePath = 'responses.json';
 let responses = {};
 
-fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-        console.error('Error reading the file:', err);
-        return;
-    }
+const readFileAsync = promisify(fs.readFile);
 
+(async () => {
     try {
+        const data = await readFileAsync(filePath, 'utf8');
         responses = JSON.parse(data);
         console.log("Responses loaded successfully: ", responses);
     } catch (err) {
-        console.error('Error parsing JSON:', err);
+        console.error('Error reading or parsing JSON:', err);
     }
-});
+})();
 
 const userStates = {};
 
