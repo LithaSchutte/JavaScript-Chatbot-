@@ -36,8 +36,7 @@ const userStates = {};
 
 io.on("connection", (socket) => {
     console.log("New client connected");
-    userStates[socket.id] = {};
-    let counter = 0;
+    userStates[socket.id] = { counter: 0 }; // Initialize counter in user state
 
     socket.emit("receiveMessage", { response: responses.default });
 
@@ -59,12 +58,14 @@ io.on("connection", (socket) => {
             return null;
         };
 
-
         function hardFallBack() {
-            counter = counter + 1
-            console.log(counter)
-            if (counter > 3) {
-                console.log("Hard Fall Back")
+            userStates[socket.id].counter += 1; // Increment counter
+            console.log(userStates[socket.id].counter);
+            if (userStates[socket.id].counter >= 4) {
+                console.log("Hard Fall Back");
+                // Send hard fallback response and reset the counter
+                response = "It seems like we're having trouble understanding each other. Please try rephrasing your question.";
+                userStates[socket.id].counter = 0; // Reset counter
             }
         }
 
@@ -72,7 +73,7 @@ io.on("connection", (socket) => {
         let responseData = findResponse(responses, userStates[socket.id].context);
 
         if (userStates[socket.id].context === "restart") {
-            responseData = findResponse(responses, "restart")
+            responseData = findResponse(responses, "restart");
         } else if (!responseData) {
             // Check basic keywords if context-specific response not found
             responseData = findResponse(responses, 'basic_keywords');
@@ -100,11 +101,11 @@ io.on("connection", (socket) => {
         } else {
             // Fallback response if no specific or default response found
             response = "I'm sorry, I didn't understand that.";
+            hardFallBack(); // Call hard fallback function
         }
 
-
         socket.emit("receiveMessage", { message, response });
-        console.log(userStates[socket.id].context)
+        console.log(userStates[socket.id].context);
     });
 
     socket.on("disconnect", () => {

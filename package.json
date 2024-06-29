@@ -5,7 +5,9 @@
   "proxy": "http://localhost:3001",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start-server": "node server/server.js",
+    "start-client": "npm start --prefix client",
+    "start": "concurrently \"npm run start-client\" \"npm run start-server\""
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "description": "",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "concurrently": "^8.2.2",
     "express": "^4.19.2",
     "react-bootstrap": "^2.10.2",
     "socket.io": "^4.7.5",
