@@ -5,7 +5,7 @@ const socketIo = require("socket.io");
 const fs = require("fs");
 const {promisify} = require("util");
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
