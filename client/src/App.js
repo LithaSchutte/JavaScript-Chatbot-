@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 import './App.css'; // Remove if not needed
 import './index.css'; // Remove if not needed
 
-const ENDPOINT = "https://intellidrivechatbot.azurewebsites.net/";
+const ENDPOINT = "http://localhost:3000";
 
 function App() {
   const [messages, setMessages] = useState([]);
