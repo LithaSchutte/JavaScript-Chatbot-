@@ -1,4 +1,5 @@
 ﻿const express = require("express");
+const path = require('path');
 const http = require("http");
 const { join } = require("path");
 const socketIo = require("socket.io");
@@ -12,11 +13,12 @@ const io = socketIo(server);
 
 app.use(express.static(join(__dirname, '../client/build')));
 
-app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, '../client/build/index.html'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-const filePath = 'server/responses.json';
+
+const filePath = 'responses.json';
 let responses = {};
 
 const readFileAsync = promisify(fs.readFile);

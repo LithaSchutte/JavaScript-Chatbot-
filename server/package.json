@@ -5,9 +5,7 @@
   "proxy": "http://localhost:3001",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-server": "node server/server.js",
-    "start-client": "npm start --prefix client",
-    "start": "concurrently \"npm run start-client\" \"npm run start-server\""
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
