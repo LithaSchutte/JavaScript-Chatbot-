@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
     res.sendFile(join(__dirname, '../client/build/index.html'));
 });
 
-const filePath = 'responses.json';
+const filePath = 'server/responses.json';
 let responses = {};
 
 const readFileAsync = promisify(fs.readFile);
