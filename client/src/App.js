@@ -19,7 +19,7 @@ function App() {
     });
 
     socketRef.current.on('refresh page', () => {
-      location.reload();
+      window.location.reload();
     })
 
     return () => {
