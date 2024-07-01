@@ -13,12 +13,13 @@ const io = socketIo(server);
 
 app.use(express.static(join(__dirname, '../client/build')));
 
+
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/public/build/index.html'));
 });
 
 
-const filePath = 'responses.json';
+const filePath = 'server/responses.json';
 let responses = {};
 
 const readFileAsync = promisify(fs.readFile);
@@ -109,6 +110,7 @@ io.on("connection", (socket) => {
         console.log(userStates[socket.id].context);
         if (userStates[socket.id].counter === 4) {
             io.to(socket.id).emit('refresh page');
+            userStates[socket.id].counter = 0;
         }
 
     });

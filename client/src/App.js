@@ -3,7 +3,6 @@ import socketIOClient from "socket.io-client";
 import './App.css'; // Remove if not needed
 import './index.css'; // Remove if not needed
 
-const ENDPOINT = "http://localhost:3000";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -12,7 +11,7 @@ function App() {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = socketIOClient(ENDPOINT);
+    socketRef.current = socketIOClient();
 
     socketRef.current.on("receiveMessage", ({ response }) => {
       setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);
