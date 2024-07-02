@@ -1,18 +1,29 @@
 ﻿const express = require("express");
 const path = require('path');
-const http = require("http");
+const https = require("https");
 const { join } = require("path");
 const socketIo = require("socket.io");
 const fs = require("fs");
 const {promisify} = require("util");
 
+let certificates;
+try {
+    certificates = {
+        key: fs.readFileSync(path.join(__dirname, 'ssl/key.pem')),
+        cert: fs.readFileSync(path.join(__dirname, 'ssl/cert.pem'))
+    };
+    console.log("SSL certificates loaded successfully.");
+} catch (err) {
+    console.error("Error loading SSL certificates:", err);
+    process.exit(1);
+}
+
 const PORT = process.env.PORT || 3001;
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(certificates, app);
 const io = socketIo(server);
 
 app.use(express.static(join(__dirname, '../client/build')));
-
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/build/index.html'));
@@ -23,6 +34,7 @@ const filePath = 'server/responses.json';
 let responses = {};
 
 const readFileAsync = promisify(fs.readFile);
+
 
 (async () => {
     try {
@@ -122,5 +134,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on https://localhost:${PORT}`);
 });
