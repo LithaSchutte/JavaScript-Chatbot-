@@ -40,7 +40,8 @@ const readFileAsync = promisify(fs.readFile);
     try {
         const data = await readFileAsync(filePath, 'utf8');
         responses = JSON.parse(data);
-        console.log("Responses loaded successfully: ", responses);
+        console.log("Responses loaded successfully")
+        //console.log("Responses loaded successfully: ", responses);
     } catch (err) {
         console.error('Error reading or parsing JSON:', err);
     }
