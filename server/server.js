@@ -25,10 +25,11 @@ const io = socketIo(server);
 
 app.use(express.static(join(__dirname, '../client/build')));
 
+/*
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/build/index.html'));
 });
-
+*/
 
 const filePath = 'server/responses.json';
 let responses = {};
