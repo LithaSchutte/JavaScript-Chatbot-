@@ -52,7 +52,7 @@ const userStates = {};
 
 /*
 const jwt = require('jsonwebtoken');
-const secretKey = 'your_secret_key'; // Replace with actual secret key
+const secretKey = 'secret_key'; // Replace with actual secret key in real scenario
 
 function isValidToken(token) {
     try {
