@@ -38,6 +38,35 @@ const readFileAsync = promisify(fs.readFile);
 
 const userStates = {};
 
+/*
+const jwt = require('jsonwebtoken');
+const secretKey = 'secret_key'; // Replace with actual secret key in real scenario
+
+function isValidToken(token) {
+    try {
+        const decoded = jwt.verify(token, secretKey);
+        return decoded; // Return the decoded token if valid
+    } catch (err) {
+        return false; // Return false if the token is invalid
+    }
+}
+
+io.use((socket, next) => {
+    const token = socket.handshake.auth.token;
+    if (!token) {
+        return next(new Error('Authentication error: Missing token'));
+    }
+    const validToken = isValidToken(token);
+    if (validToken) {
+        socket.user = validToken; // Attach user data to socket object
+        next();
+    } else {
+        return next(new Error('Authentication error: Invalid token'));
+    }
+});
+
+*/
+
 io.on("connection", (socket) => {
     console.log("New client connected");
     userStates[socket.id] = { counter: 0 }; // Initialize counter in user state

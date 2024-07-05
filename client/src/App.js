@@ -10,6 +10,19 @@ function App() {
   const messagesEndRef = useRef(null);
   const socketRef = useRef(null);
 
+  /*
+  useEffect(() => {
+    // Simulate token storage (replace 'token' with an actual token in a real scenario)
+    const token = 'token';
+
+    // Connect to the socket with the token
+    socketRef.current = socketIOClient({
+      auth: {
+        token: token
+      }
+    });
+  */
+
   useEffect(() => {
     socketRef.current = socketIOClient();
 
