@@ -1,26 +1,14 @@
 ﻿const express = require("express");
 const path = require('path');
-const https = require("https");
+const http = require("http");
 const { join } = require("path");
 const socketIo = require("socket.io");
 const fs = require("fs");
 const {promisify} = require("util");
 
-let certificates;
-try {
-    certificates = {
-        key: fs.readFileSync(path.join(__dirname, 'ssl/key.pem')),
-        cert: fs.readFileSync(path.join(__dirname, 'ssl/cert.pem'))
-    };
-    console.log("SSL certificates loaded successfully.");
-} catch (err) {
-    console.error("Error loading SSL certificates:", err);
-    process.exit(1);
-}
-
 const PORT = process.env.PORT || 3001;
 const app = express();
-const server = https.createServer(certificates, app);
+const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(express.static(join(__dirname, '../client/build')));
@@ -136,5 +124,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server listening on https://localhost:${PORT}`);
+    console.log(`Server listening on http://localhost:${PORT}`);
 });
