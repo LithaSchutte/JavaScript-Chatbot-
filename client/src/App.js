@@ -10,21 +10,14 @@ function App() {
   const messagesEndRef = useRef(null);
   const socketRef = useRef(null);
 
-  /*
   useEffect(() => {
-    // Simulate token storage (replace 'token' with an actual token in a real scenario)
-    const token = 'token';
-
-    // Connect to the socket with the token
+    const test = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjAyODAwOTB9.mO6QTCRZWmwnUaMEK_MBwKQVx3yzZ14WhCl-rG1GGWA';
+    console.log('Token:', test); // Check the value of test
     socketRef.current = socketIOClient({
       auth: {
-        token: token
+        token: test
       }
     });
-  */
-
-  useEffect(() => {
-    socketRef.current = socketIOClient();
 
     socketRef.current.on("receiveMessage", ({ response }) => {
       setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);

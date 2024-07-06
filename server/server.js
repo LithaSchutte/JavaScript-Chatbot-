@@ -5,6 +5,7 @@ const { join } = require("path");
 const socketIo = require("socket.io");
 const fs = require("fs");
 const {promisify} = require("util");
+const jwt = require('jsonwebtoken');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -37,35 +38,16 @@ const readFileAsync = promisify(fs.readFile);
 })();
 
 const userStates = {};
-
-/*
-const jwt = require('jsonwebtoken');
-const secretKey = 'secret_key'; // Replace with actual secret key in real scenario
-
-function isValidToken(token) {
-    try {
-        const decoded = jwt.verify(token, secretKey);
-        return decoded; // Return the decoded token if valid
-    } catch (err) {
-        return false; // Return false if the token is invalid
-    }
-}
-
+const secret_key = "9b0cd5d4a1b0e65b7281c47d37b8c6b750b5e7bcc2829f7d85e0b00333e3865a"
+const user = {}
+const token = jwt.sign(user, secret_key)
+console.log(token)
 io.use((socket, next) => {
-    const token = socket.handshake.auth.token;
-    if (!token) {
-        return next(new Error('Authentication error: Missing token'));
-    }
-    const validToken = isValidToken(token);
-    if (validToken) {
-        socket.user = validToken; // Attach user data to socket object
-        next();
-    } else {
-        return next(new Error('Authentication error: Invalid token'));
-    }
+  console.log('Auth Object:', socket.handshake.auth);
+  const token = socket.handshake.auth.token;
+  console.log('Token:', token);
+  next();
 });
-
-*/
 
 io.on("connection", (socket) => {
     console.log("New client connected");
