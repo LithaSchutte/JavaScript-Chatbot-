@@ -50,7 +50,7 @@ nav a:hover {
 
 /* Chatbot Section */
 #chatbot {
-    background: url('background_image.jpg') no-repeat center center/cover;
+    background: url('../public/background_image.jpg') no-repeat center center/cover;
     color: #fff;
     text-align: center;
     padding: 150px 0;
