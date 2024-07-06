@@ -1,34 +1,24 @@
 ﻿const express = require("express");
 const path = require('path');
-const https = require("https");
+const http = require("http");
 const { join } = require("path");
 const socketIo = require("socket.io");
 const fs = require("fs");
 const {promisify} = require("util");
-
-let certificates;
-try {
-    certificates = {
-        key: fs.readFileSync(path.join(__dirname, 'ssl/key.pem')),
-        cert: fs.readFileSync(path.join(__dirname, 'ssl/cert.pem'))
-    };
-    console.log("SSL certificates loaded successfully.");
-} catch (err) {
-    console.error("Error loading SSL certificates:", err);
-    process.exit(1);
-}
+const jwt = require('jsonwebtoken');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const server = https.createServer(certificates, app);
+const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(express.static(join(__dirname, '../client/build')));
 
+/*
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/build/index.html'));
 });
-
+*/
 
 const filePath = 'server/responses.json';
 let responses = {};
@@ -48,6 +38,16 @@ const readFileAsync = promisify(fs.readFile);
 })();
 
 const userStates = {};
+const secret_key = "9b0cd5d4a1b0e65b7281c47d37b8c6b750b5e7bcc2829f7d85e0b00333e3865a"
+const user = {}
+const token = jwt.sign(user, secret_key)
+console.log(token)
+io.use((socket, next) => {
+  console.log('Auth Object:', socket.handshake.auth);
+  const token = socket.handshake.auth.token;
+  console.log('Token:', token);
+  next();
+});
 
 io.on("connection", (socket) => {
     console.log("New client connected");
@@ -135,5 +135,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server listening on https://localhost:${PORT}`);
+    console.log(`Server listening on http://localhost:${PORT}`);
 });

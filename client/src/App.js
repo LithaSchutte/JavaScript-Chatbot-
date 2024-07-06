@@ -11,7 +11,13 @@ function App() {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    socketRef.current = socketIOClient();
+    const test = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjAyODAwOTB9.mO6QTCRZWmwnUaMEK_MBwKQVx3yzZ14WhCl-rG1GGWA';
+    console.log('Token:', test); // Check the value of test
+    socketRef.current = socketIOClient({
+      auth: {
+        token: test
+      }
+    });
 
     socketRef.current.on("receiveMessage", ({ response }) => {
       setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);
