@@ -20,4 +20,3 @@ In order to authenticate the sockets, upload your own secret_key.txt file in the
 Deployment:
 The live website can be accessed by visiting https://intellidrive.azurewebsites.net
 
-Additional implementations:
