@@ -21,7 +21,7 @@ app.get('*', (req, res) => {
 });
 */
 
-const filePath = 'C:\\Users\\claug\\Desktop\\ChatBotInternetTechnologies\\server\\responses.json';
+const filePath = 'server/responses.json';
 let responses = {};
 
 const readFileAsync = promisify(fs.readFile);

@@ -5,19 +5,16 @@ keyword spotting to stimulate an intelligent conversation. The keywords are stor
 in a case-based hierarchy to track the different conversation stages.
 
 Topic:
-
 Our Chatbot is a car dealership chatbot, designed to answer general questions about the cars that
 the dealership sells and service offerings. It's also possible to make an appointment for a variety
 of things such as a test drive or maintenance services.
 
 To locally start the site:
-
 1. Run npm install in both the server and client directory to install all required dependencies
 2. Run build in the client directory
-3. Run npm start in the root directory
+3. Run npm start in teh root directory
 
 Deployment:
-
 The live website can be accessed by visiting https://intellidrive.azurewebsites.net
 
 Additional implementations:
