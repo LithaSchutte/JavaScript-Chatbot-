@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import socketIOClient from "socket.io-client";
-import './App.css'; // Remove if not needed
-import './index.css'; // Remove if not needed
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -66,7 +64,6 @@ function App() {
       <header className="bg-dark text-white p-3">
         <h1 id="heading"> IntelliDrive Motors Chatbot </h1>
       </header>
-      <noscript>You need to enable JavaScript to run this app.</noscript>
       <main role="main" className="container chat-container">
         <div id="main-div" className="d-flex flex-column justify-content-between h-100">
           <div id="messages-sent" className="flex-grow-0 overflow-auto">

@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require('path');
 const http = require("http");
 const { join } = require("path");
 const socketIo = require("socket.io");
@@ -15,24 +14,16 @@ const cookieParser = require('cookie-parser');
 
 app.use(express.static(join(__dirname, '../client/build')));
 
-/*
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/public/build/index.html'));
-});
-*/
-
-const filePath = 'server/responses.json';
+const responsesFilePath = 'server/responses.json';
 let responses = {};
 
 const readFileAsync = promisify(fs.readFile);
 
-
 (async () => {
     try {
-        const data = await readFileAsync(filePath, 'utf8');
+        const data = await readFileAsync(responsesFilePath);
         responses = JSON.parse(data);
-        console.log("Responses loaded successfully")
-        //console.log("Responses loaded successfully: ", responses);
+        //console.log("Responses loaded successfully")
     } catch (err) {
         console.error('Error reading or parsing JSON:', err);
     }
@@ -40,19 +31,22 @@ const readFileAsync = promisify(fs.readFile);
 
 const userStates = {};
 
-const secret_key = "aa38faf9de2c33e05bbe9e28a42f8817a4bd962dc168688fc0d03e17ef0c4375";
-const user = {};
+const secretKeyPath = 'server/secret_key.txt'
 
-//const token = jwt.sign(user, secret_key);
-//console.log(token);
+// Read the secret key from the file
+const user = {};
+let secret_key;
+try {
+    secret_key = fs.readFileSync(secretKeyPath, 'utf8').trim();
+} catch (err) {
+    console.error('Error reading the secret key file:', err);
+}
 
 function isValidToken(token) {
     try {
-        const decoded = jwt.verify(token, secret_key);
-        console.log("Token is Valid!");
-        return true;
+        return jwt.verify(token, secret_key);
     } catch (err) {
-        console.log("Token not Valid!")
+        //"Token not Valid!"
         return false;
     }
 }
@@ -66,12 +60,10 @@ app.get('/get-token', (req, res) => {
     res.sendStatus(200);
 })
 
-
 io.use((socket, next) => {
     const token = socket.handshake.headers.cookie
         ? socket.handshake.headers.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1]
         : null;
-    console.log(token);
     const validToken = isValidToken(token);
     if (validToken) {
         next();
@@ -81,7 +73,7 @@ io.use((socket, next) => {
 });
 
 io.on("connection", (socket) => {
-    console.log("New client connected");
+    //console.log("New client connected");
     userStates[socket.id] = { counter: 0 }; // Initialize counter in user state
 
     socket.emit("receiveMessage", { response: responses.default });
@@ -104,18 +96,21 @@ io.on("connection", (socket) => {
             return null;
         };
 
+        // Refresh the page if the user inputs are wrong too many times in a row
         function hardFallBack() {
             userStates[socket.id].counter += 1; // Increment counter
-            console.log(userStates[socket.id].counter);
             if (userStates[socket.id].counter >= 4) {
-                console.log("Hard Fall Back");
                 responseData = "It seems like we're having trouble understanding each other. Restarting the chat..."
                 sleep().then(() => {
                     io.to(socket.id).emit('refresh page');
                     userStates[socket.id].counter = 0; // Reset counter
                 });
-                //userStates[socket.id].counter = 0;
             }
+        }
+
+        // Pause before refreshing the page after Hard Fallback
+        function sleep() {
+             return new Promise(resolve => setTimeout(resolve, 2000))
         }
 
         // Check context-specific responses first
@@ -157,15 +152,10 @@ io.on("connection", (socket) => {
         }
 
         socket.emit("receiveMessage", { message, response });
-        console.log(userStates[socket.id].context);
-
-        function sleep() {
-             return new Promise(resolve => setTimeout(resolve, 2000))
-        }
     });
 
     socket.on("disconnect", () => {
-        console.log("Client disconnected");
+        //console.log("Client disconnected");
         delete userStates[socket.id]; // Clean up user state on disconnect
     });
 });
