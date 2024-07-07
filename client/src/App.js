@@ -3,7 +3,6 @@ import socketIOClient from "socket.io-client";
 import './App.css'; // Remove if not needed
 import './index.css'; // Remove if not needed
 
-
 function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -11,30 +10,36 @@ function App() {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    const test = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjAyODAwOTB9.mO6QTCRZWmwnUaMEK_MBwKQVx3yzZ14WhCl-rG1GGWA';
-    console.log('Token:', test); // Check the value of test
-    socketRef.current = socketIOClient({
-      auth: {
-        token: test
-      }
-    });
+    // Fetch token from the server
+    fetch('/get-token', { credentials: 'include' })
+      .then(() => {
+        // Connect to Socket.io server
+        socketRef.current = socketIOClient({
+          withCredentials: true
+        });
 
-    socketRef.current.on("receiveMessage", ({ response }) => {
-      setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);
-    });
+        socketRef.current.on("receiveMessage", ({ response }) => {
+          setMessages((prevMessages) => [...prevMessages, { text: response, sender: 'bot' }]);
+        });
 
-    socketRef.current.on('refresh page', () => {
-      window.location.reload();
-    })
+        socketRef.current.on('refresh page', () => {
+          window.location.reload();
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching token:', error);
+      });
 
     return () => {
-      socketRef.current.disconnect();
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
     };
-  }, []);
+  }, []); // Only run once on mount
 
   const sendMessage = () => {
     let message = input.trim();
-    if (message.length !== 0) {
+    if (message.length !== 0 && socketRef.current) {
       socketRef.current.emit("sendMessage", message);
       setMessages((prevMessages) => [...prevMessages, { text: message, sender: 'user' }]);
       setInput('');
