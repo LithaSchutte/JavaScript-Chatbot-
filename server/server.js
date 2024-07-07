@@ -109,7 +109,7 @@ io.on("connection", (socket) => {
             console.log(userStates[socket.id].counter);
             if (userStates[socket.id].counter >= 4) {
                 console.log("Hard Fall Back");
-                userStates[socket.id].counter = 0;
+                responseData = "It seems like we're having trouble understanding each other. Restarting the chat..."
                 // Send hard fallback response and reset the counter
                 // response = "It seems like we're having trouble understanding each other. Please try rephrasing your question.";
                 // userStates[socket.id].counter = 0; // Reset counter
@@ -153,11 +153,17 @@ io.on("connection", (socket) => {
 
         socket.emit("receiveMessage", { message, response });
         console.log(userStates[socket.id].context);
+
         if (userStates[socket.id].counter === 4) {
-            io.to(socket.id).emit('refresh page');
-            userStates[socket.id].counter = 0;
+            sleep().then(() => {
+                io.to(socket.id).emit('refresh page');
+                userStates[socket.id].counter = 0; // Reset counter
+            });
         }
 
+        function sleep() {
+             return new Promise(resolve => setTimeout(resolve, 3000))
+        }
     });
 
     socket.on("disconnect", () => {
