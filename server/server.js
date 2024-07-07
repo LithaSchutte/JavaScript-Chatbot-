@@ -1,16 +1,17 @@
-﻿const express = require("express");
+const express = require("express");
 const path = require('path');
 const http = require("http");
 const { join } = require("path");
 const socketIo = require("socket.io");
 const fs = require("fs");
 const {promisify} = require("util");
-const jwt = require('jsonwebtoken');
-
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+const jwt = require("jsonwebtoken")
+const cors = require('cors')
+const cookieParser = require('cookie-parser');
 
 app.use(express.static(join(__dirname, '../client/build')));
 
@@ -38,15 +39,45 @@ const readFileAsync = promisify(fs.readFile);
 })();
 
 const userStates = {};
-const secret_key = "9b0cd5d4a1b0e65b7281c47d37b8c6b750b5e7bcc2829f7d85e0b00333e3865a"
-const user = {}
-const token = jwt.sign(user, secret_key)
-console.log(token)
+
+const secret_key = "aa38faf9de2c33e05bbe9e28a42f8817a4bd962dc168688fc0d03e17ef0c4375";
+const user = {};
+
+//const token = jwt.sign(user, secret_key);
+//console.log(token);
+
+function isValidToken(token) {
+    try {
+        const decoded = jwt.verify(token, secret_key);
+        console.log("Token is Valid!");
+        return true;
+    } catch (err) {
+        console.log("Token not Valid!")
+        return false;
+    }
+}
+
+app.use(cors());
+app.use(cookieParser());
+
+app.get('/get-token', (req, res) => {
+    const token = jwt.sign(user, secret_key);
+    res.cookie('token', token, { httpOnly: true });
+    res.sendStatus(200);
+})
+
+
 io.use((socket, next) => {
-  console.log('Auth Object:', socket.handshake.auth);
-  const token = socket.handshake.auth.token;
-  console.log('Token:', token);
-  next();
+    const token = socket.handshake.headers.cookie
+        ? socket.handshake.headers.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1]
+        : null;
+    console.log(token);
+    const validToken = isValidToken(token);
+    if (validToken) {
+        next();
+    } else {
+        console.log("Auth Err!");
+    }
 });
 
 io.on("connection", (socket) => {
@@ -78,6 +109,7 @@ io.on("connection", (socket) => {
             console.log(userStates[socket.id].counter);
             if (userStates[socket.id].counter >= 4) {
                 console.log("Hard Fall Back");
+                userStates[socket.id].counter = 0;
                 // Send hard fallback response and reset the counter
                 // response = "It seems like we're having trouble understanding each other. Please try rephrasing your question.";
                 // userStates[socket.id].counter = 0; // Reset counter
@@ -110,7 +142,7 @@ io.on("connection", (socket) => {
 
                 // Update context based on "switch" field in the response
                 if (responseData.switch) {
-                    userStates[socket.id].context = responseData.switch;
+                    userStates[socket.id].context = responseData.switch; 
                 }
             }
         } else {
